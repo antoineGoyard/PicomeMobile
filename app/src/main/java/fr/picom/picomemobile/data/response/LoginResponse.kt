@@ -3,16 +3,12 @@ package fr.picom.picomemobile.data.response
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-    @SerializedName("code")
-    var code: Int,
-    @SerializedName("data")
-    var `data`: Data,
-    @SerializedName("id")
-    var id: String,
-    @SerializedName("message")
-    var message: String
-) {
-    data class Data(
+    @SerializedName("email")
+    var email: String,
+    @SerializedName("accessToken")
+    var `accessToken`: String,
+) /* {
+   data class Data(
         @SerializedName("Email")
         var email: String,
         @SerializedName("id")
@@ -24,4 +20,4 @@ data class LoginResponse(
         @SerializedName("Token")
         var token: String
     )
-}
+}*/
