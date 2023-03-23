@@ -2,6 +2,7 @@ package fr.picom.picomemobile.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is BaseResponse.Error -> {
+                    stopLoading()
                     processError(it.msg)
                 }
                 else -> {
@@ -71,10 +73,23 @@ class MainActivity : AppCompatActivity() {
         val pwd = binding.txtPass.text.toString()
         viewModel.loginUser(email = email, pwd = pwd)
 
+
     }
 
     fun doSignup() {
+        val email = binding.txtInputEmail.text.toString()
+        val pwd = binding.txtPass.text.toString()
 
+        if (!isValidEmail(email)) {
+            Toast.makeText(this, "Adresse email invalide", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (!isValidPassword(pwd)) {
+            Toast.makeText(this, "Le mot de passe doit avoir au moins 5 caractères, une lettre minuscule, une lettre majuscule et un chiffre", Toast.LENGTH_SHORT).show()
+            return
+        }
+        viewModel.registerUser(email = email, pwd = pwd)
+        Toast.makeText(this, "Compte créé", Toast.LENGTH_SHORT).show()
     }
 
     fun showLoading() {
@@ -101,5 +116,13 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
+    }
 
+    private fun isValidPassword(password: String): Boolean {
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{5,}\$".toRegex()
+        return passwordPattern.matches(password)
+    }
 }
