@@ -2,7 +2,10 @@ package fr.picom.picomemobile.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
 import fr.picom.picomemobile.data.response.LoginResponse
+import fr.picom.picomemobile.data.response.UserResponse
+import fr.picom.picomemobile.models.User
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,11 +18,47 @@ object SessionManager {
     private lateinit var editor: SharedPreferences.Editor
 
     const val COOKIE_KEY = "COOKIE"
+    const val USER_KEY = "USER_OBJECT"
+
 
     fun initialize(context: Context) {
         sharedPreferences = context.getSharedPreferences("SESSION_PREFS", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
     }
+
+    fun updateUserFromLogin(existingUser: UserResponse){
+       val user = User(
+            id = existingUser.id,
+            lastName = existingUser.lastName,
+            firstName = existingUser.firstName,
+            email = existingUser.email,
+            password = existingUser.password,
+            phoneNumber = existingUser.phoneNumber,
+            numSiret = existingUser.numSiret,
+            companyName = existingUser.companyName,
+            roadName = existingUser.roadName,
+            postalCode = existingUser.postalCode,
+            roles = existingUser.roles,
+            adList = existingUser.adList,
+            verified = existingUser.verified
+        )
+        updateSessionUser(user)
+    }
+    fun updateSessionUser(user: User) {
+        val json = Gson().toJson(user)
+        editor.putString(USER_KEY, json).apply()
+    }
+
+    fun saveSessionUser(user: User) {
+        val json = Gson().toJson(user)
+        editor.putString(USER_KEY, json).apply()
+    }
+
+    fun getSessionUser(): User? {
+        val json = sharedPreferences.getString(USER_KEY, null)
+        return Gson().fromJson(json, User::class.java)
+    }
+
 
 
     fun saveSessionCookie(response: retrofit2.Response<LoginResponse>?) {

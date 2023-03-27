@@ -9,9 +9,10 @@ import fr.picom.picomemobile.data.request.RegisterRequest
 import fr.picom.picomemobile.data.response.BaseResponse
 import fr.picom.picomemobile.data.response.LoginResponse
 import fr.picom.picomemobile.data.response.RegisterResponse
+import fr.picom.picomemobile.models.User
 import fr.picom.picomemobile.repository.UserRepository
-import fr.picom.picomemobile.utils.SessionManager.getSavedCookie
 import fr.picom.picomemobile.utils.SessionManager.saveSessionCookie
+import fr.picom.picomemobile.utils.SessionManager.saveSessionUser
 import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
@@ -35,7 +36,15 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
                 if (response?.code() == 200) {
                     saveSessionCookie(response)
+
+                    val user = response.body()
+                        ?.let { User(id = it.id, email = response.body()!!.email) }
+
+                    if (user != null) {
+                        saveSessionUser(user)
+                    }
                     loginResult.value = BaseResponse.Success(response.body())
+
                 } else {
                     loginResult.value = BaseResponse.Error(response?.message())
                 }
