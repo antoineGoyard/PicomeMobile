@@ -27,6 +27,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
                 if (response?.code() == 200) {
                     userResult.value = BaseResponse.Success(response.body())
+
                 }
             } catch (ex: Exception) {
             }

@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.picom.picomemobile.R
+import fr.picom.picomemobile.adapters.AdAdapter
 import fr.picom.picomemobile.data.response.BaseResponse
 import fr.picom.picomemobile.databinding.ActivityMainBinding
+import fr.picom.picomemobile.models.Ad
 import fr.picom.picomemobile.ui.fragments.AdFragment
 import fr.picom.picomemobile.ui.fragments.HomeFragment
 import fr.picom.picomemobile.ui.fragments.ProfilFragment
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainActivityViewModel>()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,42 +34,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // initialisation fragment
 
-        //val textView = findViewById<TextView>(R.id.textView)
         //récupération de l'utilisateur
         val cookie = SessionManager.getSavedCookie()
         val id = SessionManager.getSessionUser()?.id
         if (cookie != null && id !=null ) {
             viewModel.getUser(id, cookie)
         }
-        viewModel.userResult.observe(this) {
-            when (it) {
-                is BaseResponse.Loading -> {
-                }
-
-                is BaseResponse.Success -> {
-
-                    it.data?.let { it1 -> SessionManager.updateUserFromLogin(it1) }
-                }
-                is BaseResponse.Error -> {
-
-                }
-                else -> {
-                }
-            }
-        }
-
-
-
-
-        // affichage text
-        //val textCookie =  SessionManager.getSessionUser()
-       //textView.text = textCookie.toString()
 
         val homeFragment = HomeFragment()
         val profilFragment = ProfilFragment()
         val adFragment = AdFragment()
 
-        makeCurrentFragment(homeFragment)
+
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.setOnItemSelectedListener{
             when(it.itemId){
@@ -76,6 +55,28 @@ class MainActivity : AppCompatActivity() {
                 R.id.ic_logout -> logout()
             }
             true
+        }
+
+        viewModel.userResult.observe(this) {
+            when (it) {
+                is BaseResponse.Loading -> {
+                    // handle loading state
+                }
+
+                is BaseResponse.Success -> {
+                    // update session user with data
+                    it.data?.let { user -> SessionManager.updateUserFromLogin(user) }
+                    makeCurrentFragment(homeFragment)
+                }
+
+                is BaseResponse.Error -> {
+                    // handle error state
+                }
+
+                else -> {
+                    // handle other states
+                }
+            }
         }
 
 
