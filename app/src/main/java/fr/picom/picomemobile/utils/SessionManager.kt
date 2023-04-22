@@ -29,6 +29,7 @@ object SessionManager {
     fun updateUserFromLogin(existingUser: UserResponse){
        val user = User(
             id = existingUser.id,
+           city = existingUser.city,
             lastName = existingUser.lastName,
             firstName = existingUser.firstName,
             email = existingUser.email,

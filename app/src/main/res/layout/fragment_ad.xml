@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.AdFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Création d'annonce"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"/>
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titre * "
+            android:textSize="16sp"
+           android:paddingTop="10dp"/>
+
+        <EditText
+            android:id="@+id/title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:background="@drawable/rounded_field"
+            android:inputType="text"
+            />
+
+        <!-- Texte -->
+        <TextView
+            android:id="@+id/text_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Texte * "
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+           />
+
+        <EditText
+            android:id="@+id/text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_field"
+            android:hint=""
+            android:inputType="text"/>
+
+        <!-- Image -->
+        <TextView
+            android:id="@+id/image_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image"
+            android:textSize="16sp"
+            android:paddingTop="10dp"/>
+
+        <Button
+            android:id="@+id/image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter une image*"/>
+
+        <!-- Date de début de diffusion -->
+        <TextView
+            android:id="@+id/date_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date de début de diffusion *"
+            android:textSize="16sp"
+            android:paddingTop="10dp"/>
+
+        <DatePicker
+            android:id="@+id/datePicker1"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <!-- Nombre de jours de diffusion -->
+        <TextView
+            android:id="@+id/duration_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre de jours de diffusion *"
+            android:textSize="16sp"
+            android:paddingTop="10dp"/>
+
+        <EditText
+            android:id="@+id/duration_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_field"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+
+            android:text="Créer" />
+    </LinearLayout>
+
+</ScrollView>

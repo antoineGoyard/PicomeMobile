@@ -11,6 +11,7 @@ data class User(
     val companyName: String?,
     val roadName: String?,
     val postalCode: String?,
+    val city: Int,
     val roles: List<Role>?,
     val adList: List<Ad>?,
     val verified: Boolean?
@@ -28,7 +29,8 @@ data class User(
         postalCode = null,
         roles = null,
         adList = null,
-        verified = null
+        verified = null,
+        city = 4
     )
 
 }

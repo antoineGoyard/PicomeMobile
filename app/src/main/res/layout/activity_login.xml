@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".ui.MainActivity">
 
     <ProgressBar
@@ -35,6 +36,7 @@
             android:id="@+id/txtInput_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F5F5F5"
             android:maxLength="20" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:background="#F5F5F5"
             android:maxLength="15" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +81,6 @@
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/_2sdp"
         android:text="register"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

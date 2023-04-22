@@ -3,6 +3,7 @@ package fr.picom.picomemobile.repository
 import fr.picom.picomemobile.data.methods.UserApi
 import fr.picom.picomemobile.data.request.LoginRequest
 import fr.picom.picomemobile.data.request.RegisterRequest
+import fr.picom.picomemobile.data.request.UpdateRequest
 import fr.picom.picomemobile.data.request.UserRequest
 import fr.picom.picomemobile.data.response.LoginResponse
 import fr.picom.picomemobile.data.response.RegisterResponse
@@ -22,5 +23,10 @@ class UserRepository {
     suspend fun getUser(id : Int, cookie : String): Response<UserResponse>? {
         return  UserApi.getApi()?.getUser(id,cookie)
     }
+
+    suspend fun updateUser(id :Int,updateRequest: UpdateRequest,cookie : String): Response<UserResponse>? {
+        return  UserApi.getApi()?.updateUser(id,updateRequest,cookie)
+    }
+
 
 }
