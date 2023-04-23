@@ -25,6 +25,7 @@
         app:itemTextColor="#fff"
         app:menu="@menu/nav_menu"/>
 
+
     <!--<Button
         android:id="@+id/btn_logout"
         android:text="Logout"

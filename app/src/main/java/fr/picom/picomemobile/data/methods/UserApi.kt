@@ -4,9 +4,9 @@ import fr.picom.picomemobile.data.ApiClient
 import fr.picom.picomemobile.data.request.LoginRequest
 import fr.picom.picomemobile.data.request.RegisterRequest
 import fr.picom.picomemobile.data.request.UpdateRequest
-import fr.picom.picomemobile.data.response.LoginResponse
-import fr.picom.picomemobile.data.response.RegisterResponse
-import fr.picom.picomemobile.data.response.UserResponse
+import fr.picom.picomemobile.data.response.*
+import fr.picom.picomemobile.models.Area
+import fr.picom.picomemobile.models.TimeInterval
 import fr.picom.picomemobile.models.User
 import retrofit2.Response
 import retrofit2.http.*
@@ -29,7 +29,10 @@ interface UserApi {
         ): Response<UserResponse>
 
     @GET("/api/area")
-    suspend fun getArea(): Response<RegisterResponse>
+    suspend fun getArea(  @Header("Cookie") cookie: String): List<Area>
+
+    @GET("/api/timeInterval")
+    suspend fun getTimeInterval(  @Header("Cookie") cookie: String):List<TimeInterval>
 
     companion object {
         fun getApi(): UserApi? {

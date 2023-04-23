@@ -7,7 +7,7 @@ import fr.picom.picomemobile.data.request.LoginRequest
 import fr.picom.picomemobile.data.request.UpdateRequest
 import fr.picom.picomemobile.data.response.BaseResponse
 import fr.picom.picomemobile.models.User
-import fr.picom.picomemobile.repository.UserRepository
+import fr.picom.picomemobile.ui.repository.UserRepository
 import fr.picom.picomemobile.utils.SessionManager
 import kotlinx.coroutines.launch
 

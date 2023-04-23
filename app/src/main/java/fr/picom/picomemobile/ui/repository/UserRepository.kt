@@ -1,4 +1,4 @@
-package fr.picom.picomemobile.repository
+package fr.picom.picomemobile.ui.repository
 
 import fr.picom.picomemobile.data.methods.UserApi
 import fr.picom.picomemobile.data.request.LoginRequest

@@ -26,7 +26,7 @@ class LoginActivity: AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        SessionManager.initialize(this)
+
 
         viewModel.loginResult.observe(this) {
             when (it) {

@@ -17,12 +17,52 @@
             android:textAlignment="center"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toto"
+            android:textSize="10sp"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choisir une zone *"
+            android:textSize="16sp"
+            android:paddingTop="10dp"/>
+
+        <Spinner
+            android:id="@+id/areaSpinner"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choisir une zone *"
+            android:textSize="16sp"
+            android:paddingTop="10dp"/>
+
+        <Spinner
+            android:id="@+id/slotSpinner"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+            />
+
         <!-- Titre -->
         <TextView
             android:id="@+id/title_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Titre * "
+            android:text="Titre *"
             android:textSize="16sp"
            android:paddingTop="10dp"/>
 
@@ -40,7 +80,7 @@
             android:id="@+id/text_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Texte * "
+            android:text="Texte "
             android:paddingTop="10dp"
             android:textSize="16sp"
            />
@@ -63,11 +103,24 @@
             android:paddingTop="10dp"/>
 
         <Button
-            android:id="@+id/image_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_select_image"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ajouter une image*"/>
+            android:text="Ajouter une image" />
 
+        <!-- Ajouter un ImageView pour afficher l'image sélectionnée -->
+        <ImageView
+            android:id="@+id/img_selected_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+
+            android:adjustViewBounds="true"
+            android:maxHeight="200dp"
+            android:maxWidth="400dp"
+            android:src="@drawable/bg_login" />
+z
         <!-- Date de début de diffusion -->
         <TextView
             android:id="@+id/date_label"

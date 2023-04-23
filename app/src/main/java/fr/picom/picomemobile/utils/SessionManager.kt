@@ -3,12 +3,18 @@ package fr.picom.picomemobile.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import fr.picom.picomemobile.data.response.AreaResponse
 import fr.picom.picomemobile.data.response.LoginResponse
+import fr.picom.picomemobile.data.response.TimeIntervalResponse
 import fr.picom.picomemobile.data.response.UserResponse
+import fr.picom.picomemobile.models.Area
+import fr.picom.picomemobile.models.TimeInterval
 import fr.picom.picomemobile.models.User
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,6 +31,7 @@ object SessionManager {
         sharedPreferences = context.getSharedPreferences("SESSION_PREFS", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
     }
+
 
     fun updateUserFromLogin(existingUser: UserResponse){
        val user = User(
@@ -60,6 +67,9 @@ object SessionManager {
         return Gson().fromJson(json, User::class.java)
     }
 
+    fun isUserLoggedIn(): Boolean {
+        return getSessionUser() != null
+    }
 
 
     fun saveSessionCookie(response: retrofit2.Response<LoginResponse>?) {
@@ -71,8 +81,40 @@ object SessionManager {
         return sharedPreferences.getString(COOKIE_KEY, null)
     }
 
+    fun saveSessionArea(area: List<Area>) {
+        val json = Gson().toJson(area)
+        editor.putString("AREA_LIST", json).apply()
+    }
+
+    fun saveSessionTimeInterval(timeInterval: List<TimeInterval>){
+        val json = Gson().toJson(timeInterval)
+        editor.putString("TIME_INTERVAL_LIST", json).apply()
+    }
+
+    fun getSessionArea(): List<Area> {
+        val json = sharedPreferences.getString("AREA_LIST", null)
+        return if (json != null) {
+            val type = object : TypeToken<List<Area>>() {}.type
+            Gson().fromJson(json, type)
+        } else {
+            emptyList()
+        }
+    }
+    fun getSessionTimeInterval():List<TimeInterval> {
+        val json = sharedPreferences.getString("TIME_INTERVAL_LIST", null)
+        return if (json != null) {
+            val type = object : TypeToken<List<TimeInterval>>() {}.type
+            Gson().fromJson(json, type)
+        } else {
+            emptyList()
+        }
+    }
+
+
+
     fun clearSession() {
-        editor.remove(COOKIE_KEY).apply()
+        editor.clear()
+        editor.apply()
     }
 
     fun getSessionInterceptor(): Interceptor {

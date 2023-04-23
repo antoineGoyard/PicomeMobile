@@ -10,7 +10,9 @@ import fr.picom.picomemobile.data.response.BaseResponse
 import fr.picom.picomemobile.data.response.LoginResponse
 import fr.picom.picomemobile.data.response.RegisterResponse
 import fr.picom.picomemobile.models.User
-import fr.picom.picomemobile.repository.UserRepository
+import fr.picom.picomemobile.ui.repository.AreaRepository
+import fr.picom.picomemobile.ui.repository.TimeIntervalRepository
+import fr.picom.picomemobile.ui.repository.UserRepository
 import fr.picom.picomemobile.utils.SessionManager.saveSessionCookie
 import fr.picom.picomemobile.utils.SessionManager.saveSessionUser
 import kotlinx.coroutines.launch
